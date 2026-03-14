@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 public class Student extends User {
 
-    Student(String name, int userId, String email, String password, String phoneNumber, String profilePic, String googleId) {
+    Student(String name, long userId, String email, String password, String phoneNumber, String profilePic, String googleId) {
         super(name, userId, email, password, phoneNumber, profilePic, googleId);
     }
 }
