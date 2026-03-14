@@ -2,7 +2,6 @@ package com.example.lms.model;
 
 import jakarta.persistence.Entity;
 import lombok.EqualsAndHashCode;
-import org.springframework.stereotype.Component;
 
 
 @EqualsAndHashCode(callSuper = true)

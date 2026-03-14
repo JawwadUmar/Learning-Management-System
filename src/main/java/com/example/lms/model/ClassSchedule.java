@@ -8,11 +8,14 @@ import lombok.Data;
 
 @Data
 @Entity
-public class CourseSchedule {
+public class ClassSchedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long classId;
     private long courseId;
-    private int teacherId;
-    private int dayId;
+    private long teacherId;
+    private long studentId;
+    private long duration; //duration will be in hours
     private String courseTiming;
+    private boolean done;
 }
