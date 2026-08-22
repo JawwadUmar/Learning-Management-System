@@ -14,7 +14,7 @@ spring:
       ddl-auto: update
     show-sql: true
     properties:
-      jakarta.pesistence.schema-generation.scripts:
+      jakarta.persistence.schema-generation.scripts:
         action: create
         create-target: schema.sql
         create-source: metadata
