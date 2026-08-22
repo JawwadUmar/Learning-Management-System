@@ -10,14 +10,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("users")
+@RestController
+@RequestMapping("user")
 @RequiredArgsConstructor
 public class SignInController {
   private final SigninService signinService;
 
-  @PostMapping("signin")
+  @PostMapping("/signin")
   public ResponseEntity<ApiResponse<SigninResponse>> login(
       @Valid @ModelAttribute SigninRequest signInRequest) {
     SigninResponse signinResponse = signinService.handleSignin(signInRequest);
