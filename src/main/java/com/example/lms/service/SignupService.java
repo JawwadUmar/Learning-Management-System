@@ -25,6 +25,6 @@ public class SignupService {
         user.setPhoneNumber(signupRequest.getPhoneNumber());
         user.setPassword(signupRequest.getPassword());
 
-        signupRepository.save((Student) user);
+        signupRepository.save(user);
     }
 }

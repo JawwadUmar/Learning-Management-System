@@ -20,4 +20,5 @@ public class User {
     private String phoneNumber;
     private String profilePic;
     private String googleId;
+    private Role role;
 }

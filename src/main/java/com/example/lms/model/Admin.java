@@ -1,13 +1,19 @@
 package com.example.lms.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.PrePersist;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
+@NoArgsConstructor
 public class Admin extends User{
-    Admin(String name, long userId, String email, String password, String phoneNumber, String profilePic, String googleId) {
-        super(name, userId, email, password, phoneNumber, profilePic, googleId);
+    @PrePersist
+    private void setRole(){
+        setRole(Role.ADMIN);
     }
 }
