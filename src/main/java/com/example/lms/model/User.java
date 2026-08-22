@@ -10,22 +10,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @MappedSuperclass
 public class User {
-    private String name;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long userId;
+  private String name;
 
-    @Column(unique = true)
-    private String email;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long userId;
 
-    private String password;
+  @Column(unique = true)
+  private String email;
 
-    private String phoneNumber;
+  private String password;
 
-    private String profilePic;
+  private String phoneNumber;
 
-    private String googleId;
+  private String profilePic;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+  private String googleId;
+
+  @Enumerated(EnumType.STRING)
+  private Role role;
 }

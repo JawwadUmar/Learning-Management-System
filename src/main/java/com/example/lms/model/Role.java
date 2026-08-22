@@ -1,7 +1,7 @@
 package com.example.lms.model;
 
 public enum Role {
-    ADMIN,
-    STUDENT,
-    TEACHER
+  ADMIN,
+  STUDENT,
+  TEACHER
 }

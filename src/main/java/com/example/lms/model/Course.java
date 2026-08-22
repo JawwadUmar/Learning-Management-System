@@ -9,10 +9,11 @@ import lombok.Data;
 @Data
 @Entity
 public class Course {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long courseId;
-    private String courseName;
-    private String curriculum;
-    private String courseLevel;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long courseId;
+
+  private String courseName;
+  private String curriculum;
+  private String courseLevel;
 }
