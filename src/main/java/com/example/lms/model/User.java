@@ -14,11 +14,18 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
+
     @Column(unique = true)
     private String email;
+
     private String password;
+
     private String phoneNumber;
+
     private String profilePic;
+
     private String googleId;
+
+    @Enumerated(EnumType.STRING)
     private Role role;
 }
