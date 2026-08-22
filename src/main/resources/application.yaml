@@ -9,17 +9,20 @@ spring:
     driver-class-name: org.postgresql.Driver
 
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     show-sql: true
     properties:
-      jakarta.persistence.schema-generation.scripts:
-        action: create
-        create-target: schema.sql
-        create-source: metadata
       hibernate:
         format_sql: true
 
 server:
   port: 8082
+  error:
+    include-message: always
+    include-binding-errors: always
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.tool.schema: DEBUG
