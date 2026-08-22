@@ -10,6 +10,7 @@ import com.example.lms.repository.AdminRepository;
 import com.example.lms.repository.StudentRepository;
 import com.example.lms.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -18,6 +19,7 @@ public class SigninService {
   private final TeacherRepository teacherRepository;
   private final StudentRepository studentRepository;
   private final AdminRepository adminRepository;
+  private final PasswordEncoder passwordEncoder;
 
   private static final String INVALID_CREDENTIALS_MESSAGE = "Invalid Credentials";
 
@@ -43,6 +45,13 @@ public class SigninService {
                       signinRequest.getEmail(), signinRequest.getPhoneNumber())
                   .orElseThrow(() -> new InvalidCredentialsException(INVALID_CREDENTIALS_MESSAGE));
         };
+
+    boolean passwordMatches =
+        passwordEncoder.matches(signinRequest.getPassword(), user.getPassword());
+
+    if (!passwordMatches) {
+      throw new InvalidCredentialsException("Invalid Password");
+    }
 
     UserDTO userDTO = convertToUserDTO(user);
 

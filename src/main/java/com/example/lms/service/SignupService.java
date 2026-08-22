@@ -9,6 +9,7 @@ import com.example.lms.repository.AdminRepository;
 import com.example.lms.repository.StudentRepository;
 import com.example.lms.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +18,7 @@ public class SignupService {
   private final StudentRepository studentRepository;
   private final TeacherRepository teacherRepository;
   private final AdminRepository adminRepository;
+  private final PasswordEncoder passwordEncoder;
 
   public void handleSignup(SignupRequest signupRequest) {
 
@@ -31,12 +33,14 @@ public class SignupService {
       throw new UserAlreadyExistsException("User already exists with this email");
     }
 
+    String hashedPassword = passwordEncoder.encode(signupRequest.getPassword());
+
     switch (signupRequest.getRole()) {
       case STUDENT ->
           studentRepository.save(
               Student.builder()
                   .email(signupRequest.getEmail())
-                  .password(signupRequest.getPassword())
+                  .password(hashedPassword)
                   .name(signupRequest.getName())
                   .role(signupRequest.getRole())
                   .phoneNumber(signupRequest.getPhoneNumber())
@@ -46,7 +50,7 @@ public class SignupService {
           teacherRepository.save(
               Teacher.builder()
                   .email(signupRequest.getEmail())
-                  .password(signupRequest.getPassword())
+                  .password(hashedPassword)
                   .name(signupRequest.getName())
                   .role(signupRequest.getRole())
                   .phoneNumber(signupRequest.getPhoneNumber())
@@ -56,7 +60,7 @@ public class SignupService {
           adminRepository.save(
               Admin.builder()
                   .email(signupRequest.getEmail())
-                  .password(signupRequest.getPassword())
+                  .password(hashedPassword)
                   .name(signupRequest.getName())
                   .role(signupRequest.getRole())
                   .phoneNumber(signupRequest.getPhoneNumber())
