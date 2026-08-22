@@ -3,19 +3,19 @@ package com.example.lms.service;
 import com.example.lms.dto.SignupRequest;
 import com.example.lms.exception.UserAlreadyExistsException;
 import com.example.lms.model.Student;
-import com.example.lms.repository.SignupRepository;
+import com.example.lms.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SignupService {
-  private final SignupRepository signupRepository;
+  private final StudentRepository studentRepository;
 
-  public SignupService(SignupRepository signupRepository) {
-    this.signupRepository = signupRepository;
+  public SignupService(StudentRepository studentRepository) {
+    this.studentRepository = studentRepository;
   }
 
   public void handleSignup(SignupRequest signupRequest) {
-    if (signupRepository.existsByEmail(signupRequest.getEmail())) {
+    if (studentRepository.existsByEmail(signupRequest.getEmail())) {
       throw new UserAlreadyExistsException("User already exists with this email");
     }
     Student user = new Student();
@@ -24,6 +24,6 @@ public class SignupService {
     user.setPhoneNumber(signupRequest.getPhoneNumber());
     user.setPassword(signupRequest.getPassword());
 
-    signupRepository.save(user);
+    studentRepository.save(user);
   }
 }

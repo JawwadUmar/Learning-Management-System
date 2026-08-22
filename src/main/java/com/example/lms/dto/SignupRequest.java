@@ -1,8 +1,7 @@
 package com.example.lms.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import com.example.lms.model.Role;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 @Data
@@ -18,5 +17,9 @@ public class SignupRequest {
   private String password;
 
   @NotBlank(message = "Phone Number is required")
+  @Pattern(regexp = "\\d{10}", message = "Phone number must be exactly 10 digits")
   private String phoneNumber;
+
+  @NotNull(message = "Role is required")
+  private Role role;
 }
