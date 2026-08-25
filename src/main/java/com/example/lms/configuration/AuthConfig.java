@@ -16,15 +16,16 @@ public class AuthConfig {
     return new BCryptPasswordEncoder();
   }
 
-    @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
+  @Bean
+  public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
 
-        UserDetails user = User.builder()
-                .username("user")
-                .password(passwordEncoder.encode("password"))
-                .roles("ADMIN")
-                .build();
+    UserDetails user =
+        User.builder()
+            .username("user")
+            .password(passwordEncoder.encode("password"))
+            .roles("ADMIN")
+            .build();
 
-        return new InMemoryUserDetailsManager(user);
-    }
+    return new InMemoryUserDetailsManager(user);
+  }
 }
