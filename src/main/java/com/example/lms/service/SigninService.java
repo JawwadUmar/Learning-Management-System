@@ -23,8 +23,8 @@ public class SigninService {
         authenticationService.authenticate(signinRequest);
     String jwtToken = authenticationResponse.getJwtToken();
     CustomUserDetails userDetails = authenticationResponse.getUserDetails();
-    UserDTO userDTO = convertToUserDTO(userDetails);
 
+    UserDTO userDTO = convertToUserDTO(userDetails);
     return SigninResponse.builder().userDTO(userDTO).jwtToken(jwtToken).build();
   }
 

@@ -33,7 +33,7 @@ public class CustomUserDetailsService {
   private CustomUserDetails loadTeacherByUserName(String email, String phoneNumber) {
     Teacher teacher =
         teacherRepository
-            .findByEmailAndPhoneNumber(email, phoneNumber)
+            .findByEmailOrPhoneNumber(email, phoneNumber)
             .orElseThrow(() -> new UsernameNotFoundException("Teacher with this id doesn't exist"));
     return new CustomUserDetails(teacher);
   }
@@ -41,7 +41,7 @@ public class CustomUserDetailsService {
   private CustomUserDetails loadAdminByUserName(String email, String phoneNumber) {
     Admin admin =
         adminRepository
-            .findByEmailAndPhoneNumber(email, phoneNumber)
+            .findByEmailOrPhoneNumber(email, phoneNumber)
             .orElseThrow(() -> new UsernameNotFoundException("Admin with this id doesn't exist"));
     return new CustomUserDetails(admin);
   }
@@ -49,7 +49,7 @@ public class CustomUserDetailsService {
   private CustomUserDetails loadStudentByUserName(String email, String phoneNumber) {
     Student student =
         studentRepository
-            .findByEmailAndPhoneNumber(email, phoneNumber)
+            .findByEmailOrPhoneNumber(email, phoneNumber)
             .orElseThrow(() -> new UsernameNotFoundException("Student with this id doesnt exist"));
     return new CustomUserDetails(student);
   }

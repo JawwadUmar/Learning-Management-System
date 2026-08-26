@@ -16,6 +16,7 @@ public class AuthenticationService {
   private final JwtService jwtService;
 
   public AuthenticationResponse authenticate(SigninRequest signinRequest) {
+
     CustomUserDetails userDetails =
         customUserDetailsService.loadUserByUsername(
             signinRequest.getEmail(), signinRequest.getPhoneNumber(), signinRequest.getRole());

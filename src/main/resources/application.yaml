@@ -29,6 +29,7 @@ logging:
     org.hibernate.SQL: DEBUG
     org.hibernate.tool.schema: DEBUG
     org.springframework.security: DEBUG
+    com.example.lms: DEBUG
 jwt:
   secret: changeThisToAVeryLongRandomSecretKeyThatIsAtLeast32BytesLong
   expiration: 3600000

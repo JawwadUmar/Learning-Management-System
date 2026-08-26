@@ -8,24 +8,23 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")
 @RequiredArgsConstructor
 public class SignInController {
   private final SigninService signinService;
 
   @PostMapping("/signin")
   public ResponseEntity<ApiResponse<SigninResponse>> login(
-      @Valid @ModelAttribute SigninRequest signInRequest) {
+      @Valid @RequestBody SigninRequest signInRequest) {
     SigninResponse signinResponse = signinService.handleSignin(signInRequest);
     ApiResponse<SigninResponse> signinResponseApiResponse =
         new ApiResponse<>(true, "Logged in successfully", signinResponse);
-    System.out.println(signinResponse);
     return ResponseEntity.status(HttpStatus.OK).body(signinResponseApiResponse);
   }
 }
