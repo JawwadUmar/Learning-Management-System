@@ -5,9 +5,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 @Data
 @Entity
+@SuperBuilder
 public class Course {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
