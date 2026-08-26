@@ -26,8 +26,7 @@ public class SecurityConfig {
                 auth.dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR)
                     .permitAll()
                     .requestMatchers(
-                        "/user/signin",
-                        "/user/signup",
+                        "/api/auth/**",
                         "/error",
                         "/swagger-ui/**",
                         "/swagger-ui.html",
