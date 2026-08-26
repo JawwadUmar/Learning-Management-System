@@ -16,6 +16,8 @@ public class CustomUserDetails implements UserDetails {
   private final String password;
   private final String phoneNumber;
   private final String role;
+  private final String name;
+  private final String profilePic;
 
   public CustomUserDetails(User user) {
     this.id = user.getUserId();
@@ -23,6 +25,8 @@ public class CustomUserDetails implements UserDetails {
     this.password = user.getPassword();
     this.role = user.getRole().name();
     this.phoneNumber = user.getPhoneNumber();
+    this.name = user.getName();
+    this.profilePic = user.getProfilePic();
   }
 
   @Override

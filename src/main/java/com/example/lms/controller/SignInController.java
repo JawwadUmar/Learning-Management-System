@@ -25,6 +25,7 @@ public class SignInController {
     SigninResponse signinResponse = signinService.handleSignin(signInRequest);
     ApiResponse<SigninResponse> signinResponseApiResponse =
         new ApiResponse<>(true, "Logged in successfully", signinResponse);
+    System.out.println(signinResponse);
     return ResponseEntity.status(HttpStatus.OK).body(signinResponseApiResponse);
   }
 }

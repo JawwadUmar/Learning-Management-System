@@ -9,7 +9,6 @@ import com.example.lms.repository.AdminRepository;
 import com.example.lms.repository.StudentRepository;
 import com.example.lms.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -21,35 +20,36 @@ public class CustomUserDetailsService {
   private final StudentRepository studentRepository;
   private final TeacherRepository teacherRepository;
 
-  public UserDetails loadUserByUsername(String id, Role role) throws UsernameNotFoundException {
+  public CustomUserDetails loadUserByUsername(String email, String phoneNumber, Role role)
+      throws UsernameNotFoundException {
 
     return switch (role) {
-      case TEACHER -> loadTeacherByUserName(id);
-      case ADMIN -> loadAdminByUserName(id);
-      case STUDENT -> loadStudentByUserName(id);
+      case TEACHER -> loadTeacherByUserName(email, phoneNumber);
+      case ADMIN -> loadAdminByUserName(email, phoneNumber);
+      case STUDENT -> loadStudentByUserName(email, phoneNumber);
     };
   }
 
-  private UserDetails loadTeacherByUserName(String id) {
+  private CustomUserDetails loadTeacherByUserName(String email, String phoneNumber) {
     Teacher teacher =
         teacherRepository
-            .findById(Long.valueOf(id))
+            .findByEmailAndPhoneNumber(email, phoneNumber)
             .orElseThrow(() -> new UsernameNotFoundException("Teacher with this id doesn't exist"));
     return new CustomUserDetails(teacher);
   }
 
-  private UserDetails loadAdminByUserName(String id) {
+  private CustomUserDetails loadAdminByUserName(String email, String phoneNumber) {
     Admin admin =
         adminRepository
-            .findById(Long.valueOf(id))
+            .findByEmailAndPhoneNumber(email, phoneNumber)
             .orElseThrow(() -> new UsernameNotFoundException("Admin with this id doesn't exist"));
     return new CustomUserDetails(admin);
   }
 
-  private UserDetails loadStudentByUserName(String id) {
+  private CustomUserDetails loadStudentByUserName(String email, String phoneNumber) {
     Student student =
         studentRepository
-            .findById(Long.valueOf(id))
+            .findByEmailAndPhoneNumber(email, phoneNumber)
             .orElseThrow(() -> new UsernameNotFoundException("Student with this id doesnt exist"));
     return new CustomUserDetails(student);
   }

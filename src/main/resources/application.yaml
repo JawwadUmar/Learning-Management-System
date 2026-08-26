@@ -13,7 +13,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         format_sql: true
@@ -28,7 +28,8 @@ logging:
   level:
     org.hibernate.SQL: DEBUG
     org.hibernate.tool.schema: DEBUG
-
+    org.springframework.security: DEBUG
 jwt:
   secret: changeThisToAVeryLongRandomSecretKeyThatIsAtLeast32BytesLong
   expiration: 3600000
+

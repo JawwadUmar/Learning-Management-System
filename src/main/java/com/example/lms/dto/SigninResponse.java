@@ -7,6 +7,5 @@ import lombok.Data;
 @Builder
 public class SigninResponse {
   private String jwtToken;
-  private Long expiresIn;
   private UserDTO userDTO;
 }

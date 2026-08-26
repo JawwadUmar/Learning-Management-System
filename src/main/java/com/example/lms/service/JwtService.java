@@ -1,7 +1,6 @@
 package com.example.lms.service;
 
 import com.example.lms.configuration.CustomUserDetails;
-import com.example.lms.model.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -10,27 +9,25 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.crypto.SecretKey;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class JwtService {
 
   @Value("${jwt.secret}")
-  private final String secret;
+  private String secret;
 
   @Value("${jwt.expiration}")
-  private final long expiration;
+  private long expiration;
 
   private SecretKey getSigningKey() {
     return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
   }
 
-  public String generateToken(CustomUserDetails userDetails, Role role) {
+  public String generateToken(CustomUserDetails userDetails) {
     Map<String, Object> claims = new HashMap<>();
-    claims.put("role", role.name());
+    claims.put("role", userDetails.getRole());
     claims.put("email", userDetails.getEmail());
     claims.put("phone", userDetails.getPhoneNumber());
     claims.put("user_id", String.valueOf(userDetails.getId()));
